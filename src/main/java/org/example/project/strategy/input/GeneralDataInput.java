@@ -3,10 +3,10 @@ package org.example.project.strategy.input;
 import java.io.IOException;
 import java.util.List;
 
-public class UniversalDataInput<T> {
+public class GeneralDataInput<T> {
     InputStrategy<T> inputStrategy;
 
-    public UniversalDataInput(InputStrategy<T> inputStrategy) {
+    public GeneralDataInput(InputStrategy<T> inputStrategy) {
         this.inputStrategy = inputStrategy;
     }
 

@@ -2,26 +2,28 @@ package org.example.project.strategy.input.impl;
 
 import org.example.project.strategy.input.InputStrategy;
 import org.example.project.strategy.parser.ProductParser;
-import org.example.project.strategy.prompt.Promter;
+import org.example.project.strategy.prompt.Prompter;
 import org.example.project.strategy.validation.DataValidator;
-import org.example.project.strategy.validation.Validationable;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class ManualInputStrategy<T> implements InputStrategy<T> {
-    private final DataValidator<T> dataValidator;
-    private final ProductParser<T> parser;
-    private final Promter promter;
+    private DataValidator<T> dataValidator;
+    private ProductParser<T> parser;
+    private Prompter prompter;
 
-    private final Scanner scanner = new Scanner(System.in);
+    public void setDataValidator(DataValidator<?> dataValidator) {
+        this.dataValidator = (DataValidator<T>) dataValidator;
+    }
 
-    public ManualInputStrategy(DataValidator<T> dataValidator, ProductParser<T> parser, Promter promter) {
-        this.dataValidator = dataValidator;
-        this.parser = parser;
-        this.promter = promter;
+    public void setParser(ProductParser<?> parser) {
+        this.parser = (ProductParser<T>) parser;
+    }
+
+    public void setPrompter(Prompter prompter) {
+        this.prompter = prompter;
     }
 
     @Override
@@ -31,7 +33,7 @@ public class ManualInputStrategy<T> implements InputStrategy<T> {
             T car = inputObjectData();
 
             if (!dataValidator.isValid(car)) {
-                throw new IllegalArgumentException("Некорректные данные для автомобиля."); //TODO: обрабатывать нормально, а не выводить.
+                throw new IllegalArgumentException("Некорректные данные."); //TODO: обрабатывать нормально, а не выводить.
             }
             dataList.add(car);
         }
@@ -39,7 +41,7 @@ public class ManualInputStrategy<T> implements InputStrategy<T> {
     }
 
     private T inputObjectData() throws IOException {
-        String infoLine = promter.promptInfo();
+        String infoLine = prompter.promptInfo();
         return parser.parseProduct(infoLine).get();
     }
 }

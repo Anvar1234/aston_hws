@@ -12,13 +12,19 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class FileInputStrategy<T> implements InputStrategy<T> {
-    private final String fileName;
-    ProductParser<T> parser;
-    DataValidator<T> dataValidator;
+    private String fileName;
+    private ProductParser<?> parser;
+    private DataValidator<T> dataValidator;
 
-    public FileInputStrategy(String fileName, ProductParser<T> parser, DataValidator<T> dataValidator) {
+    public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public void setParser(ProductParser<?> parser) {
         this.parser = parser;
+    }
+
+    public void setDataValidator(DataValidator<T> dataValidator) {
         this.dataValidator = dataValidator;
     }
 
@@ -42,7 +48,7 @@ public class FileInputStrategy<T> implements InputStrategy<T> {
         for (int i = 0; i < count; i++) {
             try {
 //                if(parser.parseProduct(lines.get(i)).isPresent()){
-                T object = parser.parseProduct(lines.get(i)).get();
+                T object = (T) parser.parseProduct(lines.get(i)).get();
                 dataList.add(object);
 //                }else{
 //                    throw new NoSuchElementException("Данные в файле некорректны!");

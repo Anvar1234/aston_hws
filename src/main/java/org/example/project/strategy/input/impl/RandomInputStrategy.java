@@ -6,10 +6,10 @@ import org.example.project.strategy.random.RandomDataGenerator;
 import java.util.List;
 
 public class RandomInputStrategy<T> implements InputStrategy<T> {
-    private final RandomDataGenerator<T> generator;
+    private RandomDataGenerator<T> generator;
 
-    public RandomInputStrategy(RandomDataGenerator<T> generator) {
-        this.generator = generator;
+    public void setGenerator(RandomDataGenerator<?> generator) {
+        this.generator = (RandomDataGenerator<T>) generator;
     }
 
     @Override
