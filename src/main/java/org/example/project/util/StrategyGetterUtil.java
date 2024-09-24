@@ -26,14 +26,6 @@ public class StrategyGetterUtil {
         throw new UnsupportedOperationException("StrategyGetterUtil - это утилитарный класс, " +
                 "экземпляр не может быть создан!");
     }
-//
-//    public static Map<Integer, DataValidator<?>> getValidatorStrategies() {
-//        Map<Integer, DataValidator<?>> validatorStrategies = new HashMap<>();
-//        validatorStrategies.put(1, new DataValidator<>(new CarValidation()));
-//        validatorStrategies.put(2, new DataValidator<>(new BookValidation()));
-//        validatorStrategies.put(3, new DataValidator<>(new RootCropValidation()));
-//        return validatorStrategies;
-//    }
 
     /**
      * Открытый статический метод получения стратегии рандома по id.<br>
