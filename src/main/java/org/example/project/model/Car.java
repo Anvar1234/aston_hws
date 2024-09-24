@@ -1,7 +1,5 @@
 package org.example.project.model;
 
-import org.example.project.util.ValidationUtil;
-
 public class Car implements Comparable<Car> {
     private final String model;
     private final int power;
@@ -57,10 +55,6 @@ public class Car implements Comparable<Car> {
         }
 
         public Car build() {
-            // Валидация - убрать в другое место, наверное
-            if (!ValidationUtil.validateCarData(model, power, year)) {
-                throw new IllegalArgumentException("Некорректные данные для создания автомобиля.");
-            }
             return new Car(this);
         }
     }

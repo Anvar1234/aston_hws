@@ -1,9 +1,9 @@
-package org.example.project.strategy.validation.impl;
+package org.example.project.validation.impl;
 
 import org.example.project.model.Book;
-import org.example.project.strategy.validation.ValidationStrategy;
+import org.example.project.validation.Validationable;
 
-public class BookValidationStrategy implements ValidationStrategy<Book> {
+public class BookValidation implements Validationable<Book> {
     @Override
     public boolean validate(Book product) {
         return product.getAuthor() != null &&

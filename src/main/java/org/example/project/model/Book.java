@@ -1,7 +1,5 @@
 package org.example.project.model;
 
-import org.example.project.util.ValidationUtil;
-
 public class Book implements Comparable<Book> {
     private final String author;
     private final String title;
@@ -57,10 +55,6 @@ public class Book implements Comparable<Book> {
         }
 
         public Book build() {
-            // Валидация
-            if (!ValidationUtil.validateBookData(author, title, pages)) { //TODO изменить валидацию или убрать.
-                throw new IllegalArgumentException("Некорректные данные для создания книги.");
-            }
             return new Book(this);
         }
     }

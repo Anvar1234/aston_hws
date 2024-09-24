@@ -16,28 +16,24 @@ import org.example.project.strategy.random.RandomDataGenerator;
 import org.example.project.strategy.random.impl.RandomBookStrategy;
 import org.example.project.strategy.random.impl.RandomCarsStrategy;
 import org.example.project.strategy.random.impl.RandomRootCropsStrategy;
-import org.example.project.strategy.validation.DataValidator;
-import org.example.project.strategy.validation.impl.BookValidationStrategy;
-import org.example.project.strategy.validation.impl.CarValidationStrategy;
-import org.example.project.strategy.validation.impl.RootCropValidationStrategy;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class StrategiesGetterUtil {
+public class StrategyGetterUtil {
 
-    private StrategiesGetterUtil() {
-        throw new UnsupportedOperationException("StrategiesGetterUtil - это утилитарный класс, " +
+    private StrategyGetterUtil() {
+        throw new UnsupportedOperationException("StrategyGetterUtil - это утилитарный класс, " +
                 "экземпляр не может быть создан!");
     }
-
-    public static Map<Integer, DataValidator<?>> getValidatorStrategies() {
-        Map<Integer, DataValidator<?>> validatorStrategies = new HashMap<>();
-        validatorStrategies.put(1, new DataValidator<>(new CarValidationStrategy()));
-        validatorStrategies.put(2, new DataValidator<>(new BookValidationStrategy()));
-        validatorStrategies.put(3, new DataValidator<>(new RootCropValidationStrategy()));
-        return validatorStrategies;
-    }
+//
+//    public static Map<Integer, DataValidator<?>> getValidatorStrategies() {
+//        Map<Integer, DataValidator<?>> validatorStrategies = new HashMap<>();
+//        validatorStrategies.put(1, new DataValidator<>(new CarValidation()));
+//        validatorStrategies.put(2, new DataValidator<>(new BookValidation()));
+//        validatorStrategies.put(3, new DataValidator<>(new RootCropValidation()));
+//        return validatorStrategies;
+//    }
 
     /**
      * Открытый статический метод получения стратегии рандома по id.<br>

@@ -1,10 +1,8 @@
 package org.example.project.model;
 
-import org.example.project.util.ValidationUtil;
-
 public class RootCrop implements Comparable<RootCrop> {
     private final String type;
-    private final int weight;
+    private final double weight;
     private final String color;
 
     private RootCrop(RootCropBuilder builder) {
@@ -17,7 +15,7 @@ public class RootCrop implements Comparable<RootCrop> {
         return type;
     }
 
-    public int getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -38,7 +36,7 @@ public class RootCrop implements Comparable<RootCrop> {
     // Внутренний класс билдер
     public static class RootCropBuilder {
         private String type;
-        private int weight;
+        private double weight;
         private String color;
 
         public RootCropBuilder setType(String type) {
@@ -46,7 +44,7 @@ public class RootCrop implements Comparable<RootCrop> {
             return this;
         }
 
-        public RootCropBuilder setWeight(int weight) {
+        public RootCropBuilder setWeight(double weight) {
             this.weight = weight;
             return this;
         }
@@ -57,10 +55,6 @@ public class RootCrop implements Comparable<RootCrop> {
         }
 
         public RootCrop build() {
-            // Валидация
-            if (!ValidationUtil.validateRootCropData(type, weight, color)) {
-                throw new IllegalArgumentException("Некорректные данные для создания корнеплода.");
-            }
             return new RootCrop(this);
         }
     }

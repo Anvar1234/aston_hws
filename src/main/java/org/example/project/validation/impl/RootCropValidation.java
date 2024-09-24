@@ -1,9 +1,9 @@
-package org.example.project.strategy.validation.impl;
+package org.example.project.validation.impl;
 
 import org.example.project.model.RootCrop;
-import org.example.project.strategy.validation.ValidationStrategy;
+import org.example.project.validation.Validationable;
 
-public class RootCropValidationStrategy implements ValidationStrategy<RootCrop> {
+public class RootCropValidation implements Validationable<RootCrop> {
     @Override
     public boolean validate(RootCrop product) {
         return product.getType() != null &&

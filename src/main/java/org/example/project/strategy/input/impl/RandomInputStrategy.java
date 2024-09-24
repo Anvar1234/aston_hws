@@ -8,7 +8,7 @@ import java.util.List;
 
 public class RandomInputStrategy<T> implements InputStrategy<T>, RandomGeneratorSetable {
     private RandomDataGenerator<T> generator;
-
+    // TODO: добавить аннотацию SuppressWarnings("unchecked") везде, где необходимо.
     @Override
     public void setRandomGeneratorStrategy(RandomDataGenerator<?> generator) {
         this.generator = (RandomDataGenerator<T>) generator;

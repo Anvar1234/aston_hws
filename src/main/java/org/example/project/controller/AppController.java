@@ -1,38 +1,34 @@
 package org.example.project.controller;
 
+import org.example.project.presentation.AppMenu;
 import org.example.project.service.AppService;
 import org.example.project.util.AppUtils;
 
 import java.io.IOException;
 
 public class AppController {
+    private final AppMenu appMenu;
+    private final AppService appService;
 
-    private AppController() {
-        throw new UnsupportedOperationException("AppController - это утилитарный класс, " +
-                "экземпляр не может быть создан!");
+    public AppController(AppMenu appMenu, AppService appService) {
+        this.appMenu = appMenu;
+        this.appService = appService;
     }
 
-    public static void run() {
+    public void run() {
 
         boolean exit = false;
         while (!exit) {
-            System.out.println("Выберите действие:");
-            System.out.println("1. Выбор метода ввода данных");
-            System.out.println("2. Выбор алгоритма сортировки");
-            System.out.println("3. Выполнить бинарный поиск");
-            System.out.println("4. Выйти");
-            int choice = Integer.parseInt(AppUtils.prompt(""));
+
+            int choice = appMenu.showMenu(AppMenu.MenuType.MAIN_MENU);
 
             switch (choice) {
                 case 1:
                     try {
-                        System.out.println("Выберите способ ввода данных:");
-                        System.out.println("1. Из файла");
-                        System.out.println("2. Вручную");
-                        System.out.println("3. Случайным образом");
-                        AppService.getHandleDataInput();
+                        choice = appMenu.showMenu(AppMenu.MenuType.DATA_INPUT_MENU);
+                        appService.getHandleDataInput(choice);
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        throw new RuntimeException(e); //TODO: нормально обработать!
                     }
                     break;
                 case 2:

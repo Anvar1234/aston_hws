@@ -26,4 +26,20 @@ public class AppUtils {
         System.out.print(message);
         return in.nextLine();
     }
+
+    public static int parseInteger(String input, String errorMessage) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(errorMessage, e);
+        }
+    }
+
+    public static double parseDouble(String input, String errorMessage) {
+        try {
+            return Double.parseDouble(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(errorMessage, e);
+        }
+    }
 }

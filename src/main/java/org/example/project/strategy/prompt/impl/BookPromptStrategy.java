@@ -8,6 +8,7 @@ public class BookPromptStrategy implements Promptable {
     @Override
     public String prompt() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Book,");
         stringBuilder.append(AppUtils.prompt("Введите автора книги:\n"));
         stringBuilder.append(",");
         stringBuilder.append(AppUtils.prompt("Введите название книги:\n"));

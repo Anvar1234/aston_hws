@@ -8,6 +8,7 @@ public class RootCropPromptStrategy implements Promptable {
     @Override
     public String prompt() {
         StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("RootCrop,");
         stringBuilder.append(AppUtils.prompt("Введите тип корнеплода:\n"));
         stringBuilder.append(",");
         stringBuilder.append(AppUtils.prompt("Введите вес корнеплода:\n"));

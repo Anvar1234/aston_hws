@@ -1,3 +1,3 @@
-book1,title1,12
-book2,title2,25
-book3,title3,55
+Book,book1,title1,12
+Book,book2,title2,25
+Book,book3,title3,55

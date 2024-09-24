@@ -35,24 +35,20 @@ public class FileInputStrategy<T> implements InputStrategy<T>, FileNameSetable, 
                 lines.add(line);
             }
         } catch (IOException e) {
-            System.out.println("Ошибка чтения файла: " + e.getMessage());
+            throw new IOException("Ошибка чтения файла", e);
         }
 
-        if (lines.isEmpty() || lines == null || count == 0 || count > lines.size()) {
+        if (lines.isEmpty() || count == 0 || count > lines.size()) {
             throw new RuntimeException("Запрошено некорректное количество данных или данных в файле недостаточно!");
         }
 
         List<T> dataList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             try {
-//                if(parser.parseProduct(lines.get(i)).isPresent()){
                 T object = (T) parser.parseProduct(lines.get(i)).get();
                 dataList.add(object);
-//                }else{
-//                    throw new NoSuchElementException("Данные в файле некорректны!");
-//                }
             } catch (NumberFormatException | NoSuchElementException e) {
-                System.out.println("Данные в файле некорректны!" + e.getMessage()); // TODO нормально везде обработать, а не выводить в печать.
+                System.out.println("Данные в файле некорректны!" + e.getMessage()); // TODO Возможно убрать отсюда валидацию.
             }
         }
         return dataList;
