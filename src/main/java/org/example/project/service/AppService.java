@@ -43,7 +43,7 @@ public class AppService {
                     throw new UnsupportedOperationException("Что-то напутано в методе выбора стратегии ввода.");
                 }
 
-                int productId = appMenu.showMenu(AppMenu.MenuType.PRODUCT_CHOISE_MENU);
+                int productId = appMenu.showMenu(AppMenu.MenuType.PRODUCT_CHOICE_MENU);
                 ((ParseSetable) inputStrategy).setParseStrategy(getParseStrategies(productId));
 
                 int count = AppUtils.parseInteger(prompt("Введите кол-во считываемых элементов: \n"), "Ввод должен быть числом");
@@ -52,7 +52,7 @@ public class AppService {
             case 2 -> {
                 strategy = getInputStrategies(2); // Выбираем стратегию ввода вручную (id == 2).
                 InputStrategy<?> inputStrategy = strategy.getInputStrategy(); // Получаем конкретную стратегию, чтобы засеттить данные.
-                int productId = appMenu.showMenu(AppMenu.MenuType.PRODUCT_CHOISE_MENU);
+                int productId = appMenu.showMenu(AppMenu.MenuType.PRODUCT_CHOICE_MENU);
 
                 if (inputStrategy instanceof ManualInputStrategy<?>) {
                     ((ManualInputStrategy<?>) inputStrategy).setParseStrategy(getParseStrategies(productId));
@@ -67,7 +67,7 @@ public class AppService {
             case 3 -> {
                 strategy = getInputStrategies(3); // Выбираем стратегию ввода рандомом (id == 3).
                 InputStrategy<?> inputStrategy = strategy.getInputStrategy(); // Получаем конкретную стратегию, чтобы засеттить данные.
-                int productId = appMenu.showMenu(AppMenu.MenuType.PRODUCT_CHOISE_MENU);
+                int productId = appMenu.showMenu(AppMenu.MenuType.PRODUCT_CHOICE_MENU);
 
                 if (inputStrategy instanceof RandomInputStrategy<?>) {
                     ((RandomInputStrategy<?>) inputStrategy).setRandomGeneratorStrategy(getRandomFillingStrategies(productId));
@@ -83,7 +83,7 @@ public class AppService {
                 return;
             }
         }
-        System.out.println("Полученные данные: " + products + "\n");
+        System.out.println("Полученные данные: " + products + "\n"); //TODO: потом удалить вывод.
     }
 
     public static void getHandleSorting() {

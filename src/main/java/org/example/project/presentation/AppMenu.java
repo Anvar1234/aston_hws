@@ -11,8 +11,12 @@ public class AppMenu {
     public enum MenuType {
         MAIN_MENU,
         DATA_INPUT_MENU,
-        PRODUCT_CHOISE_MENU,
-        SORTING_MENU;
+        PRODUCT_CHOICE_MENU,
+        SORTING_MENU,
+        CAR_FILED_CHOICE,
+        BOOK_FILED_CHOICE,
+        ROOT_CROP_FIELD_CHOICE,
+        ASCENDING_CHOICE
     }
 
     private final Map<MenuType, List<String>> menus = new HashMap<>();
@@ -33,11 +37,37 @@ public class AppMenu {
                 "3. Случайным образом"
         ));
 
-        menus.put(MenuType.PRODUCT_CHOISE_MENU, Arrays.asList(
+        menus.put(MenuType.PRODUCT_CHOICE_MENU, Arrays.asList(
                 "Выберите вид продукта:",
                 "1. Авто",
                 "2. Книга",
                 "3. Корнеплод (чтоб его за ногу)"
+        ));
+        menus.put(MenuType.CAR_FILED_CHOICE, Arrays.asList(
+                "Выберите поле продукта:",
+                "1. Модель",
+                "2. Мощность",
+                "3. Год выпуска"
+        ));
+
+        menus.put(MenuType.BOOK_FILED_CHOICE, Arrays.asList(
+                "Выберите поле продукта:",
+                "1. Автор",
+                "2. Название",
+                "3. Кол-во страниц"
+        ));
+
+        menus.put(MenuType.ROOT_CROP_FIELD_CHOICE, Arrays.asList(
+                "Выберите поле продукта:",
+                "1. Тип корнеплода",
+                "2. Вес корнеплода",
+                "3. Цвет корнеплода"
+        ));
+
+        menus.put(MenuType.ASCENDING_CHOICE, Arrays.asList(
+                "Как сортировать:",
+                "1. По возрастанию",
+                "2. По убыванию"
         ));
 
     }
