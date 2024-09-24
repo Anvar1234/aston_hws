@@ -22,13 +22,13 @@ public class AppController {
 
             int choice = appMenu.showMenu(AppMenu.MenuType.MAIN_MENU);
 
-            switch (choice) {
+            switch (choice) { // TODO: поменять на лямбду.
                 case 1:
                     try {
                         choice = appMenu.showMenu(AppMenu.MenuType.DATA_INPUT_MENU);
                         appService.getHandleDataInput(choice);
                     } catch (IOException e) {
-                        throw new RuntimeException(e); //TODO: нормально обработать!
+                        throw new RuntimeException(e); //TODO: нормально обработать нужно.
                     }
                     break;
                 case 2:

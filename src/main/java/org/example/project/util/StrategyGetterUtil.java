@@ -1,21 +1,21 @@
 package org.example.project.util;
 
-import org.example.project.strategy.input.DataInputter;
-import org.example.project.strategy.input.impl.FileInputStrategy;
-import org.example.project.strategy.input.impl.ManualInputStrategy;
-import org.example.project.strategy.input.impl.RandomInputStrategy;
-import org.example.project.strategy.parser.ProductParser;
-import org.example.project.strategy.parser.impl.BookParseStrategy;
-import org.example.project.strategy.parser.impl.CarParseStrategy;
-import org.example.project.strategy.parser.impl.RootCporParseStrategy;
-import org.example.project.strategy.prompt.ProductPrompter;
-import org.example.project.strategy.prompt.impl.BookPromptStrategy;
-import org.example.project.strategy.prompt.impl.CarPromptStrategy;
-import org.example.project.strategy.prompt.impl.RootCropPromptStrategy;
-import org.example.project.strategy.random.RandomDataGenerator;
-import org.example.project.strategy.random.impl.RandomBookStrategy;
-import org.example.project.strategy.random.impl.RandomCarsStrategy;
-import org.example.project.strategy.random.impl.RandomRootCropsStrategy;
+import org.example.project.service.strategy.input.DataInputter;
+import org.example.project.service.strategy.input.impl.FileInputStrategy;
+import org.example.project.service.strategy.input.impl.ManualInputStrategy;
+import org.example.project.service.strategy.input.impl.RandomInputStrategy;
+import org.example.project.service.strategy.parser.ProductParser;
+import org.example.project.service.strategy.parser.impl.BookParseStrategy;
+import org.example.project.service.strategy.parser.impl.CarParseStrategy;
+import org.example.project.service.strategy.parser.impl.RootCporParseStrategy;
+import org.example.project.service.strategy.prompt.ProductPrompter;
+import org.example.project.service.strategy.prompt.impl.BookPromptStrategy;
+import org.example.project.service.strategy.prompt.impl.CarPromptStrategy;
+import org.example.project.service.strategy.prompt.impl.RootCropPromptStrategy;
+import org.example.project.service.strategy.random.RandomDataGenerator;
+import org.example.project.service.strategy.random.impl.RandomBookStrategy;
+import org.example.project.service.strategy.random.impl.RandomCarsStrategy;
+import org.example.project.service.strategy.random.impl.RandomRootCropsStrategy;
 
 import java.util.HashMap;
 import java.util.Map;

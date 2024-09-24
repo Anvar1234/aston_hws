@@ -1,13 +1,13 @@
 package org.example.project.service;
 
 import org.example.project.presentation.AppMenu;
-import org.example.project.strategy.input.DataInputter;
-import org.example.project.strategy.input.InputStrategy;
-import org.example.project.strategy.input.FileNameSetable;
-import org.example.project.strategy.input.ParseSetable;
-import org.example.project.strategy.input.impl.FileInputStrategy;
-import org.example.project.strategy.input.impl.ManualInputStrategy;
-import org.example.project.strategy.input.impl.RandomInputStrategy;
+import org.example.project.service.strategy.input.DataInputter;
+import org.example.project.service.strategy.input.InputStrategy;
+import org.example.project.service.strategy.input.FileNameSetable;
+import org.example.project.service.strategy.input.ParseSetable;
+import org.example.project.service.strategy.input.impl.FileInputStrategy;
+import org.example.project.service.strategy.input.impl.ManualInputStrategy;
+import org.example.project.service.strategy.input.impl.RandomInputStrategy;
 import org.example.project.util.AppUtils;
 
 import java.io.IOException;

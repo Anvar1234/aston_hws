@@ -30,7 +30,7 @@ public class RootCrop implements Comparable<RootCrop> {
 
     @Override
     public String toString() {
-        return "RootCrop [type=" + type + ", weight=" + weight + ", color=" + color + "]";
+        return "Корнеплод: тип= " + type + ", вес= " + weight + ", цвет= " + color;
     }
 
     // Внутренний класс билдер

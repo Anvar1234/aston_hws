@@ -30,7 +30,7 @@ public class Book implements Comparable<Book> {
 
     @Override
     public String toString() {
-        return "Book [author=" + author + ", title=" + title + ", pages=" + pages + "]";
+        return "Книга: автор= " + author + ", название= " + title + ", кол-во страниц= " + pages;
     }
 
     // Внутренний класс билдер

@@ -30,7 +30,7 @@ public class Car implements Comparable<Car> {
 
     @Override
     public String toString() {
-        return "Car [model=" + model + ", power=" + power + ", year=" + year + "]";
+        return "Авто: модель= " + model + ", мощность= " + power + ", дата выпуска= " + year;
     }
 
     // Внутренний класс билдер
