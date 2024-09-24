@@ -1,12 +1,13 @@
 package org.example.project.strategy.prompt;
 
-public class Prompter {
+public class ProductPrompter {
     private final Promptable promptable;
 
-    public Prompter(Promptable promptable) {
+    public ProductPrompter(Promptable promptable) {
         this.promptable = promptable;
     }
-    public String promptInfo(){
+
+    public String promptInfo() {
         return this.promptable.prompt();
     }
 }

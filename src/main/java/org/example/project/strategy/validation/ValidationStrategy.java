@@ -1,5 +1,5 @@
 package org.example.project.strategy.validation;
 
-public interface Validationable<T> {
+public interface ValidationStrategy<T> {
     boolean validate(T product);
 }

@@ -1,12 +1,12 @@
 package org.example.project.strategy.parser.impl;
 
 import org.example.project.model.Car;
-import org.example.project.strategy.parser.Parser;
+import org.example.project.strategy.parser.ParseStrategy;
 
 import java.io.IOException;
 import java.util.Optional;
 
-public class CarParser implements Parser<Car> {
+public class CarParseStrategy implements ParseStrategy<Car> {
     @Override
     public Optional<Car> parse(String line) throws IOException {
         Car car = null;
@@ -21,7 +21,7 @@ public class CarParser implements Parser<Car> {
                     .setYear(Integer.parseInt(parts[2]))
                     .build();
         } catch (NumberFormatException e) {
-            System.out.println(e); // TODO нормально везде обработать.
+            System.out.println(e.getMessage()); // TODO нормально везде обработать.
         }
         return Optional.ofNullable(car);
     }

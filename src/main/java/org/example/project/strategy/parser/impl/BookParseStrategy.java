@@ -1,12 +1,12 @@
 package org.example.project.strategy.parser.impl;
 
 import org.example.project.model.Book;
-import org.example.project.strategy.parser.Parser;
+import org.example.project.strategy.parser.ParseStrategy;
 
 import java.io.IOException;
 import java.util.Optional;
 
-public class BookParser implements Parser<Book> {
+public class BookParseStrategy implements ParseStrategy<Book> {
     @Override
     public Optional<Book> parse(String line) throws IOException {
         Book book = null;

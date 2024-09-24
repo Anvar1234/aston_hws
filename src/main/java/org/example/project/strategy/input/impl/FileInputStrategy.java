@@ -1,8 +1,9 @@
 package org.example.project.strategy.input.impl;
 
 import org.example.project.strategy.input.InputStrategy;
+import org.example.project.strategy.input.FileNameSetable;
+import org.example.project.strategy.input.ParseSetable;
 import org.example.project.strategy.parser.ProductParser;
-import org.example.project.strategy.validation.DataValidator;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -11,21 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class FileInputStrategy<T> implements InputStrategy<T> {
+public class FileInputStrategy<T> implements InputStrategy<T>, FileNameSetable, ParseSetable {
     private String fileName;
     private ProductParser<?> parser;
-    private DataValidator<T> dataValidator;
 
+    @Override
     public void setFileName(String fileName) {
         this.fileName = fileName;
     }
 
-    public void setParser(ProductParser<?> parser) {
+    @Override
+    public void setParseStrategy(ProductParser<?> parser) {
         this.parser = parser;
-    }
-
-    public void setDataValidator(DataValidator<T> dataValidator) {
-        this.dataValidator = dataValidator;
     }
 
     @Override

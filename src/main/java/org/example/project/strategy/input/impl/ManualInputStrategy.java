@@ -1,29 +1,27 @@
 package org.example.project.strategy.input.impl;
 
 import org.example.project.strategy.input.InputStrategy;
+import org.example.project.strategy.input.ParseSetable;
+import org.example.project.strategy.input.PromptSetable;
 import org.example.project.strategy.parser.ProductParser;
-import org.example.project.strategy.prompt.Prompter;
-import org.example.project.strategy.validation.DataValidator;
+import org.example.project.strategy.prompt.ProductPrompter;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManualInputStrategy<T> implements InputStrategy<T> {
-    private DataValidator<T> dataValidator;
+public class ManualInputStrategy<T> implements InputStrategy<T>, ParseSetable, PromptSetable {
     private ProductParser<T> parser;
-    private Prompter prompter;
+    private ProductPrompter promptStrategy;
 
-    public void setDataValidator(DataValidator<?> dataValidator) {
-        this.dataValidator = (DataValidator<T>) dataValidator;
+    @Override
+    public void setPromptStrategy(ProductPrompter promptStrategy) {
+        this.promptStrategy = promptStrategy;
     }
 
-    public void setParser(ProductParser<?> parser) {
+    @Override
+    public void setParseStrategy(ProductParser<?> parser) {
         this.parser = (ProductParser<T>) parser;
-    }
-
-    public void setPrompter(Prompter prompter) {
-        this.prompter = prompter;
     }
 
     @Override
@@ -31,17 +29,13 @@ public class ManualInputStrategy<T> implements InputStrategy<T> {
         List<T> dataList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             T car = inputObjectData();
-
-            if (!dataValidator.isValid(car)) {
-                throw new IllegalArgumentException("Некорректные данные."); //TODO: обрабатывать нормально, а не выводить.
-            }
             dataList.add(car);
         }
         return dataList;
     }
 
     private T inputObjectData() throws IOException {
-        String infoLine = prompter.promptInfo();
+        String infoLine = promptStrategy.promptInfo();
         return parser.parseProduct(infoLine).get();
     }
 }

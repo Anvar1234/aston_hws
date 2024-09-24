@@ -1,9 +1,9 @@
 package org.example.project.strategy.validation;
 
 public class DataValidator<T> {
-    private final Validationable<T> validation;
+    private final ValidationStrategy<T> validation;
 
-    public DataValidator(Validationable<T> validation) {
+    public DataValidator(ValidationStrategy<T> validation) {
         this.validation = validation;
     }
 

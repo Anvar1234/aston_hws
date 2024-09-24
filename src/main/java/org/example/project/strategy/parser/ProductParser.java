@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.Optional;
 
 public class ProductParser<T> {
-    private final Parser<T> parser;
+    private final ParseStrategy<T> parser;
 
-    public ProductParser(Parser<T> parser) {
+    public ProductParser(ParseStrategy<T> parser) {
         this.parser = parser;
     }
 
