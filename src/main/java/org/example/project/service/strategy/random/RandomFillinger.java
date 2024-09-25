@@ -2,10 +2,10 @@ package org.example.project.service.strategy.random;
 
 import java.util.List;
 
-public class RandomDataGenerator<T> {
+public class RandomFillinger<T> {
     RandomFillingStrategy<T> random;
 
-    public RandomDataGenerator(RandomFillingStrategy<T> random) {
+    public RandomFillinger(RandomFillingStrategy<T> random) {
         this.random = random;
     }
     public List<T> getRandomData(int count){

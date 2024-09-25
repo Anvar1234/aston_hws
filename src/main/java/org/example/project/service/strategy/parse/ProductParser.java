@@ -1,4 +1,4 @@
-package org.example.project.service.strategy.parser;
+package org.example.project.service.strategy.parse;
 
 import java.io.IOException;
 import java.util.Optional;

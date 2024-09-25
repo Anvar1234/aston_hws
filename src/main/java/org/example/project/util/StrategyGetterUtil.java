@@ -4,15 +4,15 @@ import org.example.project.service.strategy.input.DataInputter;
 import org.example.project.service.strategy.input.impl.FileInputStrategy;
 import org.example.project.service.strategy.input.impl.ManualInputStrategy;
 import org.example.project.service.strategy.input.impl.RandomInputStrategy;
-import org.example.project.service.strategy.parser.ProductParser;
-import org.example.project.service.strategy.parser.impl.BookParseStrategy;
-import org.example.project.service.strategy.parser.impl.CarParseStrategy;
-import org.example.project.service.strategy.parser.impl.RootCporParseStrategy;
+import org.example.project.service.strategy.parse.ProductParser;
+import org.example.project.service.strategy.parse.impl.BookParseStrategy;
+import org.example.project.service.strategy.parse.impl.CarParseStrategy;
+import org.example.project.service.strategy.parse.impl.RootCporParseStrategy;
 import org.example.project.service.strategy.prompt.ProductPrompter;
 import org.example.project.service.strategy.prompt.impl.BookPromptStrategy;
 import org.example.project.service.strategy.prompt.impl.CarPromptStrategy;
 import org.example.project.service.strategy.prompt.impl.RootCropPromptStrategy;
-import org.example.project.service.strategy.random.RandomDataGenerator;
+import org.example.project.service.strategy.random.RandomFillinger;
 import org.example.project.service.strategy.random.impl.RandomBookStrategy;
 import org.example.project.service.strategy.random.impl.RandomCarsStrategy;
 import org.example.project.service.strategy.random.impl.RandomRootCropsStrategy;
@@ -33,13 +33,13 @@ public class StrategyGetterUtil {
      * 2 - рандом для Книги.<br>
      * 3 - рандом для Корнеплода (чтоб его за ногу).
      * @param id - идентификатор стратегии.
-     * @return RandomDataGenerator - возвращает общий для стратегий тип RandomDataGenerator, имеющий метод получения списка рандомных объектов в зависимости от продукта.
+     * @return RandomFillinger - возвращает общий для стратегий тип RandomFillinger, имеющий метод получения списка рандомных объектов в зависимости от продукта.
      */
-    public static RandomDataGenerator<?> getRandomFillingStrategies(int id) {
-        Map<Integer, RandomDataGenerator<?>> randomFillingStrategies = new HashMap<>();
-        randomFillingStrategies.put(1, new RandomDataGenerator<>(new RandomCarsStrategy()));
-        randomFillingStrategies.put(2, new RandomDataGenerator<>(new RandomBookStrategy()));
-        randomFillingStrategies.put(3, new RandomDataGenerator<>(new RandomRootCropsStrategy()));
+    public static RandomFillinger<?> getRandomFillingStrategies(int id) {
+        Map<Integer, RandomFillinger<?>> randomFillingStrategies = new HashMap<>();
+        randomFillingStrategies.put(1, new RandomFillinger<>(new RandomCarsStrategy()));
+        randomFillingStrategies.put(2, new RandomFillinger<>(new RandomBookStrategy()));
+        randomFillingStrategies.put(3, new RandomFillinger<>(new RandomRootCropsStrategy()));
         return randomFillingStrategies.get(id);
     }
 

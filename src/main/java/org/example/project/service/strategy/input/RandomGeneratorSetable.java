@@ -1,8 +1,8 @@
 package org.example.project.service.strategy.input;
 
-import org.example.project.service.strategy.random.RandomDataGenerator;
+import org.example.project.service.strategy.random.RandomFillinger;
 
 public interface RandomGeneratorSetable {
 
-    void setRandomGeneratorStrategy(RandomDataGenerator<?> generator);
+    void setRandomGeneratorStrategy(RandomFillinger<?> generator);
 }

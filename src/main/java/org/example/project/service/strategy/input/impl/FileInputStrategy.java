@@ -3,7 +3,7 @@ package org.example.project.service.strategy.input.impl;
 import org.example.project.service.strategy.input.FileNameSetable;
 import org.example.project.service.strategy.input.ParseSetable;
 import org.example.project.service.strategy.input.InputStrategy;
-import org.example.project.service.strategy.parser.ProductParser;
+import org.example.project.service.strategy.parse.ProductParser;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

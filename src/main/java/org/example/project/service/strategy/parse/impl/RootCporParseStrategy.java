@@ -1,7 +1,7 @@
-package org.example.project.service.strategy.parser.impl;
+package org.example.project.service.strategy.parse.impl;
 
 import org.example.project.model.RootCrop;
-import org.example.project.service.strategy.parser.ParseStrategy;
+import org.example.project.service.strategy.parse.ParseStrategy;
 import org.example.project.util.AppUtils;
 import org.example.project.service.validation.impl.RootCropValidation;
 
