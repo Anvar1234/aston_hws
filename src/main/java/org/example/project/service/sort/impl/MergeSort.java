@@ -7,27 +7,27 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class MergeSort<T> {
+public class MergeSort<T extends Comparable<T>> {
 
-      public void mergeSort(List<T> list, UniversalComparator comparator) {
+    public void mergeSort(List<T> list) {
         if (list.size() > 1) {
             int middle = list.size() / 2;
 
             List<T> left = new ArrayList<>(list.subList(0, middle));
             List<T> right = new ArrayList<>(list.subList(middle, list.size()));
 
-            mergeSort(left, comparator);
-            mergeSort(right, comparator);
+            mergeSort(left);
+            mergeSort(right);
 
-            merge(list, left, right, comparator);
+            merge(list, left, right);
         }
     }
 
-    private void merge(List<T> list, List<T> left, List<T> right, Comparator<T> comparator) {
+    private void merge(List<T> list, List<T> left, List<T> right) {
         int i = 0, j = 0, k = 0;
 
         while (i < left.size() && j < right.size()) {
-            if (comparator.compare(left.get(i), right.get(j)) <= 0) {
+            if (left.get(i).compareTo(right.get(j)) <= 0) {
                 list.set(k++, left.get(i++));
             } else {
                 list.set(k++, right.get(j++));

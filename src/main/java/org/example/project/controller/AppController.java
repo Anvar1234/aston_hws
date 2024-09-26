@@ -58,13 +58,13 @@ public class AppController {
                             case 1 -> {//мерге сорт
                                 System.out.println("В касе 1");
                                 //TODO: проверка, что не пустой список в мапе.
-                                products.put(1, appService.getHandleSorting((List<Object>) products.get(0), choice));
+                                products.put(1, appService.getHandleSorting(products.get(0), choice));
                                 products.get(1).forEach(System.out::println);
                             }
                             case 2 -> { //мерге сорт по четным
                                 System.out.println("В касе 2");
 //                                new EvenNumberMergeSort<>().evenMergeSort((List<NumericFieldGetable<Number>>) products.get(0), ((ComparatorGetable) products.get(0).get(0)).getComparator());
-                                products.put(2, appService.getHandleSorting((List<Object>) products.get(0), choice));
+                                products.put(2, appService.getHandleSorting(products.get(0), choice));
                                 products.get(2).forEach(System.out::println);
 
 //                                System.out.println("В касе 2");

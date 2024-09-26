@@ -99,31 +99,22 @@ public class AppService {
         return products;
     }
 
-    public List<?> getHandleSorting(List<Object> products, int choice) {
+    public List<?> getHandleSorting(List<?> products, int choice) {
         switch (choice) {
             case 1 -> {
-                if (products.get(0) instanceof Car){
-                new MergeSort<>().mergeSort(products, new UniversalComparator<Car>("power"));
-                return products;
-                } else if (products.get(0) instanceof Book) {
-                    new MergeSort<>().mergeSort(products, new UniversalComparator<Book>("pages"));
+                    new MergeSort<>().mergeSort((List) products);
                     return products;
-                } else if (products.get(0) instanceof RootCrop) {
-                    new MergeSort<>().mergeSort(products, new UniversalComparator<RootCrop>("weight"));
-                    return products;
-                } else {
-                    System.out.println("Список заполнен чем-то не тем.");
                 }
-            }
+
             case 2 -> { //вот комент
-                if (products.get(0) instanceof Car){
-                    new EvenNumberMergeSort<>().evenMergeSort(products, new UniversalComparator<Car>("power"));
+                if (products.get(0) instanceof Car) {
+                    new EvenNumberMergeSort<>().evenMergeSort((List) products, new UniversalComparator<Car>("power"));
                     return products;
                 } else if (products.get(0) instanceof Book) {
-                    new EvenNumberMergeSort<>().evenMergeSort(products, new UniversalComparator<Book>("pages"));
+                    new EvenNumberMergeSort<>().evenMergeSort((List) products, new UniversalComparator<Book>("pages"));
                     return products;
                 } else if (products.get(0) instanceof RootCrop) {
-                    new EvenNumberMergeSort<>().evenMergeSort(products, new UniversalComparator<RootCrop>("weight"));
+                    new EvenNumberMergeSort<>().evenMergeSort((List) products, new UniversalComparator<RootCrop>("weight"));
                     return products;
                 } else {
                     System.out.println("Список заполнен чем-то не тем.");
