@@ -13,6 +13,7 @@ public class AppMenu {
         DATA_INPUT_MENU,
         PRODUCT_CHOICE_MENU,
         SORTING_MENU,
+        RESULT_OUTPUT,
         CAR_FILED_CHOICE,
         BOOK_FILED_CHOICE,
         ROOT_CROP_FIELD_CHOICE,
@@ -43,31 +44,15 @@ public class AppMenu {
                 "2. Книга",
                 "3. Корнеплод (чтоб его за ногу)"
         ));
-        menus.put(MenuType.CAR_FILED_CHOICE, Arrays.asList(
-                "Выберите поле продукта:",
-                "1. Модель",
-                "2. Мощность",
-                "3. Год выпуска"
-        ));
 
-        menus.put(MenuType.BOOK_FILED_CHOICE, Arrays.asList(
-                "Выберите поле продукта:",
-                "1. Автор",
-                "2. Название",
-                "3. Кол-во страниц"
-        ));
-
-        menus.put(MenuType.ROOT_CROP_FIELD_CHOICE, Arrays.asList(
-                "Выберите поле продукта:",
-                "1. Тип корнеплода",
-                "2. Вес корнеплода",
-                "3. Цвет корнеплода"
-        ));
-
-        menus.put(MenuType.ASCENDING_CHOICE, Arrays.asList(
+        menus.put(MenuType.SORTING_MENU, Arrays.asList(
                 "Как сортировать:",
-                "1. По возрастанию",
-                "2. По убыванию"
+                "1. MergeSort",
+                "2. MergeSort по четным"
+        ));
+
+        menus.put(MenuType.RESULT_OUTPUT, Arrays.asList(
+                "Полученные данные: "
         ));
 
     }

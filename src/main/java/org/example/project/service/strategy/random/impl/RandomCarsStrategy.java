@@ -1,6 +1,6 @@
 package org.example.project.service.strategy.random.impl;
 
-import org.example.project.model.Car;
+import org.example.project.model.impl.Car;
 import org.example.project.service.strategy.random.RandomFillingStrategy;
 
 import java.util.ArrayList;

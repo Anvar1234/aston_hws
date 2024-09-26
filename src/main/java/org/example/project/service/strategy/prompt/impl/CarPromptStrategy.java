@@ -6,13 +6,11 @@ import org.example.project.util.AppUtils;
 public class CarPromptStrategy implements PromptStrategy {
     @Override
     public String prompt() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Car,");
-        stringBuilder.append(AppUtils.prompt("Введите модель автомобиля:\n"));
-        stringBuilder.append(",");
-        stringBuilder.append(AppUtils.prompt("Введите мощность автомобиля:\n"));
-        stringBuilder.append(",");
-        stringBuilder.append(AppUtils.prompt("Введите год производства:\n"));
-        return stringBuilder.toString();
+        return "Car," +
+                AppUtils.prompt("Введите модель автомобиля:\n") +
+                "," +
+                AppUtils.prompt("Введите мощность автомобиля:\n") +
+                "," +
+                AppUtils.prompt("Введите год производства:\n");
     }
 }

@@ -5,11 +5,9 @@ import java.util.Comparator;
 
 public class UniversalComparator<T> implements Comparator<T> {
     private final String fieldName;
-    private final boolean ascending;
 
-    public UniversalComparator(String fieldName, boolean ascending) {
+    public UniversalComparator(String fieldName) {
         this.fieldName = fieldName;
-        this.ascending = ascending; // По возрастанию?
     }
 
     @Override
@@ -30,8 +28,7 @@ public class UniversalComparator<T> implements Comparator<T> {
             }
 
             if (value1 instanceof Comparable) {
-                int comparison = ((Comparable) value1).compareTo(value2);
-                return ascending ? comparison : -comparison; // По возрастанию == true.
+               return ((Comparable) value1).compareTo(value2);
             } else {
                 throw new UnsupportedOperationException("Невозможно сравнить объекты типа: " + value1.getClass());
             }

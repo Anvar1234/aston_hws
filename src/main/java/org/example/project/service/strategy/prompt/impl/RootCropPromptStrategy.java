@@ -7,13 +7,11 @@ public class RootCropPromptStrategy implements PromptStrategy {
 
     @Override
     public String prompt() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("RootCrop,");
-        stringBuilder.append(AppUtils.prompt("Введите тип корнеплода:\n"));
-        stringBuilder.append(",");
-        stringBuilder.append(AppUtils.prompt("Введите вес корнеплода:\n"));
-        stringBuilder.append(",");
-        stringBuilder.append(AppUtils.prompt("Введите цвет корнеплода:\n"));
-        return stringBuilder.toString();
+        return "RootCrop," +
+                AppUtils.prompt("Введите тип корнеплода:\n") +
+                "," +
+                AppUtils.prompt("Введите вес корнеплода:\n") +
+                "," +
+                AppUtils.prompt("Введите цвет корнеплода:\n");
     }
 }

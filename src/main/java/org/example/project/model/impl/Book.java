@@ -1,6 +1,14 @@
-package org.example.project.model;
+package org.example.project.model.impl;
 
-public class Book implements Comparable<Book> {
+import org.example.project.model.ComparatorGetable;
+import org.example.project.model.FieldsNamesGetable;
+import org.example.project.model.NumericFieldGetable;
+import org.example.project.service.comparator.UniversalComparator;
+
+import java.util.Comparator;
+import java.util.List;
+
+public class Book implements Comparable<Book>, FieldsNamesGetable, NumericFieldGetable<Integer>, ComparatorGetable<Book> {
     private final String author;
     private final String title;
     private final int pages;
@@ -31,6 +39,21 @@ public class Book implements Comparable<Book> {
     @Override
     public String toString() {
         return "Книга: автор= " + author + ", название= " + title + ", кол-во страниц= " + pages;
+    }
+
+    @Override
+    public List<String> getFieldsNames() {
+        return List.of("author", "title", "pages");
+    }
+
+    @Override
+    public Integer getNumericField() {
+        return getPages(); //TODO: Добавить в репо.
+    }
+
+    @Override
+    public Comparator<Book> getComparator() {
+     return new UniversalComparator<>("pages");
     }
 
     // Внутренний класс билдер

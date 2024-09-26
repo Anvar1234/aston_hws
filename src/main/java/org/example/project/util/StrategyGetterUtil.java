@@ -90,4 +90,12 @@ public class StrategyGetterUtil {
         inputStrategies.put(3, new DataInputter<>(new RandomInputStrategy<>()));
         return inputStrategies.get(id);
     }
+
+//    public static DataInputter<?> getSorting(int id) {
+//        Map<Integer, Sortable<?>> inputStrategies = new HashMap<>();
+//        inputStrategies.put(1, new MergeSort<>());
+//        inputStrategies.put(2, new EvenNumberMergeSort<>(x -> x. = 0));
+//
+//    }
+
 }

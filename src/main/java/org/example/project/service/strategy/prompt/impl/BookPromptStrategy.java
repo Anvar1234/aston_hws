@@ -7,13 +7,11 @@ public class BookPromptStrategy implements PromptStrategy {
 
     @Override
     public String prompt() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Book,");
-        stringBuilder.append(AppUtils.prompt("Введите автора книги:\n"));
-        stringBuilder.append(",");
-        stringBuilder.append(AppUtils.prompt("Введите название книги:\n"));
-        stringBuilder.append(",");
-        stringBuilder.append(AppUtils.prompt("Введите количество страниц:\n"));
-        return stringBuilder.toString();
+        return "Book," +
+                AppUtils.prompt("Введите автора книги:\n") +
+                "," +
+                AppUtils.prompt("Введите название книги:\n") +
+                "," +
+                AppUtils.prompt("Введите количество страниц:\n");
     }
 }

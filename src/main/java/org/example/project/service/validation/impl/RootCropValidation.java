@@ -1,6 +1,6 @@
 package org.example.project.service.validation.impl;
 
-import org.example.project.model.RootCrop;
+import org.example.project.model.impl.RootCrop;
 import org.example.project.service.validation.Validationable;
 
 public class RootCropValidation implements Validationable<RootCrop> {

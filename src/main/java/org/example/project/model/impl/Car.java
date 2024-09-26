@@ -1,6 +1,14 @@
-package org.example.project.model;
+package org.example.project.model.impl;
 
-public class Car implements Comparable<Car> {
+import org.example.project.model.ComparatorGetable;
+import org.example.project.model.FieldsNamesGetable;
+import org.example.project.model.NumericFieldGetable;
+import org.example.project.service.comparator.UniversalComparator;
+
+import java.util.Comparator;
+import java.util.List;
+
+public class Car implements Comparable<Car>, FieldsNamesGetable, NumericFieldGetable<Integer>, ComparatorGetable<Car> { //TODO: удалить ненужные импл.
     private final String model;
     private final int power;
     private final int year;
@@ -31,6 +39,21 @@ public class Car implements Comparable<Car> {
     @Override
     public String toString() {
         return "Авто: модель= " + model + ", мощность= " + power + ", дата выпуска= " + year;
+    }
+
+    @Override
+    public List<String> getFieldsNames() {
+        return List.of("model", "power", "year");
+    }
+
+    @Override
+    public Integer getNumericField() {
+        return getPower();
+    }
+
+    @Override
+    public Comparator<Car> getComparator() {
+        return new UniversalComparator<>("power");
     }
 
     // Внутренний класс билдер

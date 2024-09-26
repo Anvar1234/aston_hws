@@ -1,6 +1,10 @@
 package org.example.project.service;
 
+import org.example.project.model.ComparatorGetable;
+import org.example.project.model.NumericFieldGetable;
 import org.example.project.presentation.AppMenu;
+import org.example.project.service.sort.impl.EvenNumberMergeSort;
+import org.example.project.service.sort.impl.MergeSort;
 import org.example.project.service.strategy.input.DataInputter;
 import org.example.project.service.strategy.input.InputStrategy;
 import org.example.project.service.strategy.input.FileNameSetable;
@@ -16,9 +20,6 @@ import java.util.List;
 import static org.example.project.util.AppUtils.*;
 import static org.example.project.util.StrategyGetterUtil.*;
 
-/**
- * Утильный класс с методами для основной логики.
- */
 public class AppService {
 
     private final AppMenu appMenu;
@@ -27,9 +28,9 @@ public class AppService {
         this.appMenu = appMenu;
     }
 
-    public void getHandleDataInput(int inputChoice) throws IOException {
+    public List<?> getHandleDataInput(int inputChoice) throws IOException {
 
-        List<?> products;
+        List<?> products = List.of();
         DataInputter<?> strategy;
 
         switch (inputChoice) {
@@ -43,11 +44,15 @@ public class AppService {
                     throw new UnsupportedOperationException("Что-то напутано в методе выбора стратегии ввода.");
                 }
 
-                int productId = appMenu.showMenu(AppMenu.MenuType.PRODUCT_CHOICE_MENU);
+                int productId = appMenu.showMenu(AppMenu.MenuType.PRODUCT_CHOICE_MENU); // TODO: добавить прверки, если число <=0 и если больше кол-ва пунктов меню. Добавить енамам метод getMenuLength
                 ((ParseSetable) inputStrategy).setParseStrategy(getParseStrategies(productId));
 
-                int count = AppUtils.parseInteger(prompt("Введите кол-во считываемых элементов: \n"), "Ввод должен быть числом");
+                int count = parseInteger(prompt("Введите кол-во считываемых элементов: \n"), "Ввод должен быть числом");
                 products = strategy.getInputData(count);
+                for (int i = 0; i < products.size(); i++) { //TODO: почистить
+                    System.out.println(products.get(i));
+                }
+                return products;
             }
             case 2 -> {
                 strategy = getInputStrategies(2); // Выбираем стратегию ввода вручную (id == 2).
@@ -61,8 +66,9 @@ public class AppService {
                     throw new UnsupportedOperationException("Что-то напутано в методе выбора стратегии ввода.");
                 }
 
-                int count = AppUtils.parseInteger(prompt("Введите кол-во вводимых элементов: \n"), "Ввод должен быть числом");
+                int count = parseInteger(prompt("Введите кол-во вводимых элементов: \n"), "Ввод должен быть числом");
                 products = strategy.getInputData(count);
+                return products;
             }
             case 3 -> {
                 strategy = getInputStrategies(3); // Выбираем стратегию ввода рандомом (id == 3).
@@ -75,23 +81,36 @@ public class AppService {
                     throw new UnsupportedOperationException("Что-то напутано в методе выбора стратегии ввода.");
                 }
 
-                int count = AppUtils.parseInteger(prompt("Введите кол-во генерируемых элементов: \n"), "Ввод должен быть числом");
+                int count = parseInteger(prompt("Введите кол-во генерируемых элементов: \n"), "Ввод должен быть числом");
                 products = strategy.getInputData(count);
+                return products;
             }
             default -> {
                 System.out.println("Некорректный выбор.");
-                return;
             }
+
         }
-        System.out.println("Полученные данные: " + products + "\n"); //TODO: потом удалить вывод.
+        System.out.println("Полученные данные: " + products + "\n"); //TODO: потом удалить , это не работает.
+        return products;
     }
 
-    public static void getHandleSorting() {
-
+    public List<?> getHandleSorting(List<?> products, int choice) {
+        switch (choice) {
+            case 1 -> {
+                new MergeSort<>().mergeSort((List<Object>) products.get(0), ((ComparatorGetable) ((List) products.get(0)).get(0)).getComparator());
+                return products;
+            }
+            case 2 -> {
+                new EvenNumberMergeSort<>().evenMergeSort((List<NumericFieldGetable<Number>>) products.get(0), ((ComparatorGetable) ((List) products.get(0)).get(0)).getComparator());
+                return products;
+            }
+            default -> System.out.println("Некорректный выбор.");
+        }
+        return List.of();
     }
 
-    public static void getHandleBinarySearch() {
-
+    public void getHandleBinarySearch() {
+        System.out.println("Хер тебе, а не поиск.");
     }
 }
 

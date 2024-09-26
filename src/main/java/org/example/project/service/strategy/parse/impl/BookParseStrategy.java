@@ -1,6 +1,6 @@
 package org.example.project.service.strategy.parse.impl;
 
-import org.example.project.model.Book;
+import org.example.project.model.impl.Book;
 import org.example.project.service.strategy.parse.ParseStrategy;
 import org.example.project.util.AppUtils;
 import org.example.project.service.validation.impl.BookValidation;
