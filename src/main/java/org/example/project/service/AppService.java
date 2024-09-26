@@ -1,13 +1,15 @@
 package org.example.project.service;
 
-import org.example.project.model.ComparatorGetable;
-import org.example.project.model.NumericFieldGetable;
 import org.example.project.model.impl.Book;
 import org.example.project.model.impl.Car;
 import org.example.project.model.impl.RootCrop;
 import org.example.project.presentation.AppMenu;
-import org.example.project.service.comparator.UniversalComparator;
+import org.example.project.service.comparator.impl.BookPagesComparator;
 import org.example.project.service.comparator.impl.CarPowerComparator;
+import org.example.project.service.comparator.impl.RootCropWeightComparator;
+import org.example.project.service.search.impl.BookSerachStrategy;
+import org.example.project.service.search.impl.CarSearchStrategy;
+import org.example.project.service.search.impl.RootCropSearchStrategy;
 import org.example.project.service.sort.impl.EvenNumberMergeSort;
 import org.example.project.service.sort.impl.MergeSort;
 import org.example.project.service.strategy.input.DataInputter;
@@ -17,10 +19,11 @@ import org.example.project.service.strategy.input.ParseSetable;
 import org.example.project.service.strategy.input.impl.FileInputStrategy;
 import org.example.project.service.strategy.input.impl.ManualInputStrategy;
 import org.example.project.service.strategy.input.impl.RandomInputStrategy;
+import org.example.project.util.AppUtils;
 
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import static org.example.project.util.AppUtils.*;
 import static org.example.project.util.StrategyGetterUtil.*;
@@ -53,7 +56,7 @@ public class AppService {
                 ((ParseSetable) inputStrategy).setParseStrategy(getParseStrategies(productId));
 
                 int count = parseInteger(prompt("Введите кол-во считываемых элементов: \n"), "Ввод должен быть числом");
-                products = strategy.getInputData(count);
+                products = strategy.input(count);
                 for (int i = 0; i < products.size(); i++) { //TODO: почистить
                     System.out.println(products.get(i));
                 }
@@ -72,7 +75,7 @@ public class AppService {
                 }
 
                 int count = parseInteger(prompt("Введите кол-во вводимых элементов: \n"), "Ввод должен быть числом");
-                products = strategy.getInputData(count);
+                products = strategy.input(count);
                 return products;
             }
             case 3 -> {
@@ -87,7 +90,7 @@ public class AppService {
                 }
 
                 int count = parseInteger(prompt("Введите кол-во генерируемых элементов: \n"), "Ввод должен быть числом");
-                products = strategy.getInputData(count);
+                products = strategy.input(count);
                 return products;
             }
             default -> {
@@ -102,19 +105,19 @@ public class AppService {
     public List<?> getHandleSorting(List<?> products, int choice) {
         switch (choice) {
             case 1 -> {
-                    new MergeSort<>().mergeSort((List) products);
-                    return products;
-                }
+                new MergeSort<>().mergeSort((List) products);
+                return products;
+            }
 
             case 2 -> { //вот комент
                 if (products.get(0) instanceof Car) {
-                    new EvenNumberMergeSort<>().evenMergeSort((List) products, new UniversalComparator<Car>("power"));
+                    new EvenNumberMergeSort<>().evenMergeSort((List) products, new CarPowerComparator());
                     return products;
                 } else if (products.get(0) instanceof Book) {
-                    new EvenNumberMergeSort<>().evenMergeSort((List) products, new UniversalComparator<Book>("pages"));
+                    new EvenNumberMergeSort<>().evenMergeSort((List) products, new BookPagesComparator());
                     return products;
                 } else if (products.get(0) instanceof RootCrop) {
-                    new EvenNumberMergeSort<>().evenMergeSort((List) products, new UniversalComparator<RootCrop>("weight"));
+                    new EvenNumberMergeSort<>().evenMergeSort((List) products, new RootCropWeightComparator());
                     return products;
                 } else {
                     System.out.println("Список заполнен чем-то не тем.");
@@ -127,8 +130,28 @@ public class AppService {
         return List.of();
     }
 
-    public void getHandleBinarySearch() {
-        System.out.println("Хер тебе, а не поиск.");
+    public void getHandleBinarySearch(List<?> products) {
+        if (products.get(0) instanceof Car) {
+            String target = AppUtils.prompt("Введите наименование модели: ");
+            Optional<Car> car = new CarSearchStrategy().binarySearch((List<Car>) products, target);
+            if (car.isPresent()) {
+                System.out.println(car.get());
+            } else System.out.println("Ничего не найдено :(");
+        } else if (products.get(0) instanceof Book) {
+            String target = AppUtils.prompt("Введите название книги: ");
+            Optional<Book> book = new BookSerachStrategy().binarySearch((List<Book>) products, target);
+            if (book.isPresent()) {
+                System.out.println(book.get());
+            } else System.out.println("Ничего не найдено :(");
+        } else if (products.get(0) instanceof RootCrop) {
+            String target = AppUtils.prompt("Введите тип корнеплода: ");
+            Optional<RootCrop> rootCrop = new RootCropSearchStrategy().binarySearch((List<RootCrop>) products, target);
+            if (rootCrop.isPresent()) {
+                System.out.println(rootCrop.get());
+            } else System.out.println("Ничего не найдено :(");
+        } else {
+            System.out.println("Список заполнен чем-то не тем.");
+        }
     }
 }
 

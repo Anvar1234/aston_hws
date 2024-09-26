@@ -9,7 +9,7 @@ import java.util.List;
 
 public class EvenNumberMergeSort<T> {
 
-    public void evenMergeSort(List<T> list, UniversalComparator comparator) {
+    public void evenMergeSort(List<T> list, Comparator comparator) {
         if (list.size() > 1) {
             int middle = list.size() / 2;
 

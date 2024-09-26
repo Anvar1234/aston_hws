@@ -24,12 +24,11 @@ public class AppController {
     }
 
     public void run() {
-        Map<Integer, List<?>> products = new HashMap<>();
 
+        Map<Integer, List<?>> products = new HashMap<>();
 
         boolean exit = false;
         while (!exit) {
-
             int choice = appMenu.showMenu(AppMenu.MenuType.MAIN_MENU);
 
             switch (choice) {
@@ -39,7 +38,7 @@ public class AppController {
                         products.put(0, appService.getHandleDataInput(choice));
 
                         System.out.println("Полученные данные: ");
-                        for (int i = 0; i < products.get(0).size(); i++) {//TODO: удалить.
+                        for (int i = 0; i < products.get(0).size(); i++) {
                             System.out.println(products.get(0).get(i));
                         }
                     } catch (IOException e) {
@@ -49,39 +48,33 @@ public class AppController {
                 case 2 -> {
                     if (!products.containsKey(0)) {
                         System.out.println("Сначала следует заполнить список.");
-                        return;
+
                     } else {
                         choice = appMenu.showMenu(AppMenu.MenuType.SORTING_MENU);
                         switch (choice) {
-//TODO: сделать типа того. То есть получать компаратор у продукта и все.
-//                        products.put(1, appService.getHandleSorting((Map<Integer, List<?>>) products.get(0), products.get(0).getComparator, getStrategy)); // TODO: вот это не забыть. И если так написать, то сможет ли получить свое значение по ключу? А, должно.
-                            case 1 -> {//мерге сорт
+                            case 1 -> {
                                 System.out.println("В касе 1");
                                 //TODO: проверка, что не пустой список в мапе.
                                 products.put(1, appService.getHandleSorting(products.get(0), choice));
                                 products.get(1).forEach(System.out::println);
                             }
-                            case 2 -> { //мерге сорт по четным
+                            case 2 -> {
                                 System.out.println("В касе 2");
-//                                new EvenNumberMergeSort<>().evenMergeSort((List<NumericFieldGetable<Number>>) products.get(0), ((ComparatorGetable) products.get(0).get(0)).getComparator());
                                 products.put(2, appService.getHandleSorting(products.get(0), choice));
                                 products.get(2).forEach(System.out::println);
-
-//                                System.out.println("В касе 2");
-//                                new EvenNumberMergeSort<>().evenMergeSort((List<NumericFieldGetable<Number>>) products.get(0), ((ComparatorGetable) products.get(0).get(0)).getComparator());
-//                                products.put(2, products.get(0));
-//                                products.get(2).forEach(System.out::println);
                             }
                         }
                     }
                 }
 
                 case 3 -> {
-                    if (!products.containsKey(1)) {
+                    if (!products.containsKey(0)) {
+                        System.out.println("Сначала следует заполнить список.");
+                    } else if (!products.containsKey(1)) { //TODO: пофиксить, что когда заполняют новым продуктом, и потом сразу поиск - ошибка.
                         System.out.println("Сначала следует отсортировать список через MergeSort.");
-                        return;
                     } else {
-                        appService.getHandleBinarySearch();
+                        appService.getHandleBinarySearch(products.get(1));
+                        products.put(1, List.of());
                     }
                 }
 
