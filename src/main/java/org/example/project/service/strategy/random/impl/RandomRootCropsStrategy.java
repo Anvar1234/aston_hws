@@ -10,7 +10,7 @@ import java.util.Random;
 public class RandomRootCropsStrategy implements RandomFillingStrategy<RootCrop> {
     @Override
     public List<RootCrop> generateRandomData(int count) {
-        Random random = new Random(); //TODO убрать в рандомайзер
+        Random random = new Random();
         List<RootCrop> crops = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             crops.add(new RootCrop.RootCropBuilder()

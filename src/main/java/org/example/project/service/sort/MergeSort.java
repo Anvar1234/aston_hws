@@ -1,10 +1,6 @@
-package org.example.project.service.sort.impl;
-
-import org.example.project.model.impl.Car;
-import org.example.project.service.comparator.UniversalComparator;
+package org.example.project.service.sort;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class MergeSort<T extends Comparable<T>> {

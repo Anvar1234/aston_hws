@@ -10,8 +10,8 @@ import org.example.project.service.comparator.impl.RootCropWeightComparator;
 import org.example.project.service.search.impl.BookSerachStrategy;
 import org.example.project.service.search.impl.CarSearchStrategy;
 import org.example.project.service.search.impl.RootCropSearchStrategy;
-import org.example.project.service.sort.impl.EvenNumberMergeSort;
-import org.example.project.service.sort.impl.MergeSort;
+import org.example.project.service.sort.EvenNumberMergeSort;
+import org.example.project.service.sort.MergeSort;
 import org.example.project.service.strategy.input.DataInputter;
 import org.example.project.service.strategy.input.InputStrategy;
 import org.example.project.service.strategy.input.FileNameSetable;
@@ -57,7 +57,7 @@ public class AppService {
 
                 int count = parseInteger(prompt("Введите кол-во считываемых элементов: \n"), "Ввод должен быть числом");
                 products = strategy.input(count);
-                for (int i = 0; i < products.size(); i++) { //TODO: почистить
+                for (int i = 0; i < products.size(); i++) { //TODO: почистить или оставить
                     System.out.println(products.get(i));
                 }
                 return products;
@@ -109,7 +109,7 @@ public class AppService {
                 return products;
             }
 
-            case 2 -> { //вот комент
+            case 2 -> {
                 if (products.get(0) instanceof Car) {
                     new EvenNumberMergeSort<>().evenMergeSort((List) products, new CarPowerComparator());
                     return products;
@@ -120,10 +120,8 @@ public class AppService {
                     new EvenNumberMergeSort<>().evenMergeSort((List) products, new RootCropWeightComparator());
                     return products;
                 } else {
-                    System.out.println("Список заполнен чем-то не тем.");
+                    System.out.println("Список заполнен чем-то не тем."); //TODO: если сначала пройти все 3 этапа и через мерге сорт, а потом снова выбрать сортировку, но уже по четным, тогда выходит это сообщение. Это потому, что я создаю копию для четной сортировки.
                 }
-//                new EvenNumberMergeSort<>().evenMergeSort((List<NumericFieldGetable<Number>>) products.get(0), ((ComparatorGetable) ((List) products.get(0)).get(0)).getComparator());
-//                return products;
             }
             default -> System.out.println("Некорректный выбор.");
         }

@@ -1,7 +1,6 @@
-package org.example.project.service.sort.impl;
+package org.example.project.service.sort;
 
 import org.example.project.model.NumericFieldGetable;
-import org.example.project.service.comparator.UniversalComparator;
 
 import java.util.ArrayList;
 import java.util.Comparator;

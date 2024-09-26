@@ -19,7 +19,7 @@ public class BookParseStrategy implements ParseStrategy<Book> {
             throw new IllegalArgumentException("Выбранный тип продукта и тип из файла не совпадают!");
         }
         try {
-            book = new Book.BookBuilder() //TODO добавить проверки корректности ТИПА вводимых значений.
+            book = new Book.BookBuilder()
                     .setAuthor(parts[1])
                     .setTitle(parts[2])
                     .setPages(AppUtils.parseInteger(parts[3], "Количество страниц должно быть числом."))

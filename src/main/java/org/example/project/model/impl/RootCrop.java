@@ -1,14 +1,8 @@
 package org.example.project.model.impl;
 
-import org.example.project.model.ComparatorGetable;
-import org.example.project.model.FieldsNamesGetable;
 import org.example.project.model.NumericFieldGetable;
-import org.example.project.service.comparator.UniversalComparator;
 
-import java.util.Comparator;
-import java.util.List;
-
-public class RootCrop implements Comparable<RootCrop>, FieldsNamesGetable, NumericFieldGetable<Integer>, ComparatorGetable<RootCrop> {
+public class RootCrop implements Comparable<RootCrop>, NumericFieldGetable<Integer> {
     private final String type;
     private final int weight;
     private final String color;
@@ -42,18 +36,8 @@ public class RootCrop implements Comparable<RootCrop>, FieldsNamesGetable, Numer
     }
 
     @Override
-    public List<String> getFieldsNames() {
-        return List.of("type", "weight", "color");
-    } //TODO: тоже поудалять.
-
-    @Override
     public Integer getNumericField() {
         return getWeight();
-    }
-
-    @Override
-    public Comparator<RootCrop> getComparator() {
-        return new UniversalComparator<>("weight");
     }
 
     // Внутренний класс билдер

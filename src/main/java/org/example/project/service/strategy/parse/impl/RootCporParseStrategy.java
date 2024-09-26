@@ -19,9 +19,9 @@ public class RootCporParseStrategy implements ParseStrategy<RootCrop> {
             throw new IllegalArgumentException("Выбранный тип продукта и тип из файла не совпадают!");
         }
         try {
-            rootCrop = new RootCrop.RootCropBuilder()//TODO добавить проверки корректности ТИПА вводимых значений.
+            rootCrop = new RootCrop.RootCropBuilder()
                     .setType(parts[1])
-                    .setWeight(AppUtils.parseInteger(parts[2], "Вес корнеплода должен быть числом.")) // TODO: здесь дабл, не интежер!
+                    .setWeight(AppUtils.parseInteger(parts[2], "Вес корнеплода должен быть числом."))
                     .setColor(parts[3])
                     .build();
             if (!new RootCropValidation().validate(rootCrop)) {
