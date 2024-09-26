@@ -1,6 +1,7 @@
 package org.example.project.service.sort.impl;
 
-import org.example.project.service.sort.Sortable;
+import org.example.project.model.impl.Car;
+import org.example.project.service.comparator.UniversalComparator;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class MergeSort<T> {
 
-      public void mergeSort(List<T> list, Comparator<T> comparator) {
+      public void mergeSort(List<T> list, UniversalComparator comparator) {
         if (list.size() > 1) {
             int middle = list.size() / 2;
 

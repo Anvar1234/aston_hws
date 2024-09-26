@@ -8,9 +8,9 @@ import org.example.project.service.comparator.UniversalComparator;
 import java.util.Comparator;
 import java.util.List;
 
-public class RootCrop implements Comparable<RootCrop>, FieldsNamesGetable, NumericFieldGetable<Double>, ComparatorGetable<RootCrop> {
+public class RootCrop implements Comparable<RootCrop>, FieldsNamesGetable, NumericFieldGetable<Integer>, ComparatorGetable<RootCrop> {
     private final String type;
-    private final double weight;
+    private final int weight;
     private final String color;
 
     private RootCrop(RootCropBuilder builder) {
@@ -23,7 +23,7 @@ public class RootCrop implements Comparable<RootCrop>, FieldsNamesGetable, Numer
         return type;
     }
 
-    public double getWeight() {
+    public int getWeight() {
         return weight;
     }
 
@@ -47,7 +47,7 @@ public class RootCrop implements Comparable<RootCrop>, FieldsNamesGetable, Numer
     } //TODO: тоже поудалять.
 
     @Override
-    public Double getNumericField() {
+    public Integer getNumericField() {
         return getWeight();
     }
 
@@ -59,7 +59,7 @@ public class RootCrop implements Comparable<RootCrop>, FieldsNamesGetable, Numer
     // Внутренний класс билдер
     public static class RootCropBuilder {
         private String type;
-        private double weight;
+        private int weight;
         private String color;
 
         public RootCropBuilder setType(String type) {
@@ -67,7 +67,7 @@ public class RootCrop implements Comparable<RootCrop>, FieldsNamesGetable, Numer
             return this;
         }
 
-        public RootCropBuilder setWeight(double weight) {
+        public RootCropBuilder setWeight(int weight) {
             this.weight = weight;
             return this;
         }

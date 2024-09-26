@@ -2,7 +2,12 @@ package org.example.project.service;
 
 import org.example.project.model.ComparatorGetable;
 import org.example.project.model.NumericFieldGetable;
+import org.example.project.model.impl.Book;
+import org.example.project.model.impl.Car;
+import org.example.project.model.impl.RootCrop;
 import org.example.project.presentation.AppMenu;
+import org.example.project.service.comparator.UniversalComparator;
+import org.example.project.service.comparator.impl.CarPowerComparator;
 import org.example.project.service.sort.impl.EvenNumberMergeSort;
 import org.example.project.service.sort.impl.MergeSort;
 import org.example.project.service.strategy.input.DataInputter;
@@ -12,9 +17,9 @@ import org.example.project.service.strategy.input.ParseSetable;
 import org.example.project.service.strategy.input.impl.FileInputStrategy;
 import org.example.project.service.strategy.input.impl.ManualInputStrategy;
 import org.example.project.service.strategy.input.impl.RandomInputStrategy;
-import org.example.project.util.AppUtils;
 
 import java.io.IOException;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.example.project.util.AppUtils.*;
@@ -90,19 +95,41 @@ public class AppService {
             }
 
         }
-        System.out.println("Полученные данные: " + products + "\n"); //TODO: потом удалить , это не работает.
+//        System.out.println("Полученные данные: " + products + "\n"); //TODO: потом удалить , это не работает.
         return products;
     }
 
-    public List<?> getHandleSorting(List<?> products, int choice) {
+    public List<?> getHandleSorting(List<Object> products, int choice) {
         switch (choice) {
             case 1 -> {
-                new MergeSort<>().mergeSort((List<Object>) products.get(0), ((ComparatorGetable) ((List) products.get(0)).get(0)).getComparator());
+                if (products.get(0) instanceof Car){
+                new MergeSort<>().mergeSort(products, new UniversalComparator<Car>("power"));
                 return products;
+                } else if (products.get(0) instanceof Book) {
+                    new MergeSort<>().mergeSort(products, new UniversalComparator<Book>("pages"));
+                    return products;
+                } else if (products.get(0) instanceof RootCrop) {
+                    new MergeSort<>().mergeSort(products, new UniversalComparator<RootCrop>("weight"));
+                    return products;
+                } else {
+                    System.out.println("Список заполнен чем-то не тем.");
+                }
             }
-            case 2 -> {
-                new EvenNumberMergeSort<>().evenMergeSort((List<NumericFieldGetable<Number>>) products.get(0), ((ComparatorGetable) ((List) products.get(0)).get(0)).getComparator());
-                return products;
+            case 2 -> { //вот комент
+                if (products.get(0) instanceof Car){
+                    new EvenNumberMergeSort<>().evenMergeSort(products, new UniversalComparator<Car>("power"));
+                    return products;
+                } else if (products.get(0) instanceof Book) {
+                    new EvenNumberMergeSort<>().evenMergeSort(products, new UniversalComparator<Book>("pages"));
+                    return products;
+                } else if (products.get(0) instanceof RootCrop) {
+                    new EvenNumberMergeSort<>().evenMergeSort(products, new UniversalComparator<RootCrop>("weight"));
+                    return products;
+                } else {
+                    System.out.println("Список заполнен чем-то не тем.");
+                }
+//                new EvenNumberMergeSort<>().evenMergeSort((List<NumericFieldGetable<Number>>) products.get(0), ((ComparatorGetable) ((List) products.get(0)).get(0)).getComparator());
+//                return products;
             }
             default -> System.out.println("Некорректный выбор.");
         }

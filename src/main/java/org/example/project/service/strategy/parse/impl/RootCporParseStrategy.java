@@ -21,7 +21,7 @@ public class RootCporParseStrategy implements ParseStrategy<RootCrop> {
         try {
             rootCrop = new RootCrop.RootCropBuilder()//TODO добавить проверки корректности ТИПА вводимых значений.
                     .setType(parts[1])
-                    .setWeight(AppUtils.parseDouble(parts[2], "Вес корнеплода должен быть числом.")) // TODO: здесь дабл, не интежер!
+                    .setWeight(AppUtils.parseInteger(parts[2], "Вес корнеплода должен быть числом.")) // TODO: здесь дабл, не интежер!
                     .setColor(parts[3])
                     .build();
             if (!new RootCropValidation().validate(rootCrop)) {
