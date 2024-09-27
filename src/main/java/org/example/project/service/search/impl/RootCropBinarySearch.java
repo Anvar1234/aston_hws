@@ -1,6 +1,6 @@
 package org.example.project.service.search.impl;
 
-import org.example.project.model.impl.RootCrop;
+import org.example.project.model.RootCrop;
 import org.example.project.service.search.BinarySearchable;
 
 import java.util.List;

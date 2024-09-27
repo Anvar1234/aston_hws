@@ -1,8 +1,6 @@
-package org.example.project.model.impl;
+package org.example.project.model;
 
-import org.example.project.model.NumericFieldGetable;
-
-public class Car implements Comparable<Car>, NumericFieldGetable<Integer>{ //TODO: удалить ненужные импл.
+public class Car implements Comparable<Car>{
     private final String model;
     private final int power;
     private final int year;
@@ -27,17 +25,12 @@ public class Car implements Comparable<Car>, NumericFieldGetable<Integer>{ //TOD
 
     @Override
     public int compareTo(Car other) {
-        return this.model.compareTo(other.model); // Сортировка по модели по умолчанию
+        return this.model.compareTo(other.model);
     }
 
     @Override
     public String toString() {
         return "Авто: модель= " + model + ", мощность= " + power + ", дата выпуска= " + year;
-    }
-
-    @Override
-    public Integer getNumericField() {
-        return getPower();
     }
 
     public static class CarBuilder {

@@ -1,9 +1,8 @@
 package org.example.project.service.sort;
 
-import org.example.project.model.NumericFieldGetable;
-import org.example.project.model.impl.Book;
-import org.example.project.model.impl.Car;
-import org.example.project.model.impl.RootCrop;
+import org.example.project.model.Book;
+import org.example.project.model.Car;
+import org.example.project.model.RootCrop;
 
 import java.util.ArrayList;
 import java.util.Comparator;

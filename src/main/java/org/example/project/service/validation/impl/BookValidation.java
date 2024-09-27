@@ -1,6 +1,6 @@
 package org.example.project.service.validation.impl;
 
-import org.example.project.model.impl.Book;
+import org.example.project.model.Book;
 import org.example.project.service.validation.Validationable;
 
 public class BookValidation implements Validationable<Book> {

@@ -1,8 +1,6 @@
-package org.example.project.model.impl;
+package org.example.project.model;
 
-import org.example.project.model.NumericFieldGetable;
-
-public class RootCrop implements Comparable<RootCrop>, NumericFieldGetable<Integer> {
+public class RootCrop implements Comparable<RootCrop> {
     private final String type;
     private final int weight;
     private final String color;
@@ -33,11 +31,6 @@ public class RootCrop implements Comparable<RootCrop>, NumericFieldGetable<Integ
     @Override
     public String toString() {
         return "Корнеплод: тип= " + type + ", вес= " + weight + ", цвет= " + color;
-    }
-
-    @Override
-    public Integer getNumericField() {
-        return getWeight();
     }
 
     // Внутренний класс билдер

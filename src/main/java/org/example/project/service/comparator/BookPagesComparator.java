@@ -1,6 +1,6 @@
-package org.example.project.service.comparator.impl;
+package org.example.project.service.comparator;
 
-import org.example.project.model.impl.Book;
+import org.example.project.model.Book;
 
 import java.util.Comparator;
 

@@ -1,8 +1,6 @@
-package org.example.project.model.impl;
+package org.example.project.model;
 
-import org.example.project.model.NumericFieldGetable;
-
-public class Book implements Comparable<Book>, NumericFieldGetable<Integer> {
+public class Book implements Comparable<Book>{
     private final String author;
     private final String title;
     private final int pages;
@@ -33,11 +31,6 @@ public class Book implements Comparable<Book>, NumericFieldGetable<Integer> {
     @Override
     public String toString() {
         return "Книга: автор= " + author + ", название= " + title + ", кол-во страниц= " + pages;
-    }
-
-    @Override
-    public Integer getNumericField() {
-        return getPages(); //TODO: Добавить в репо.
     }
 
     // Внутренний класс билдер

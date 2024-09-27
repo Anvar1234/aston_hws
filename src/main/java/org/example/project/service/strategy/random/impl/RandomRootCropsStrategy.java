@@ -1,6 +1,6 @@
 package org.example.project.service.strategy.random.impl;
 
-import org.example.project.model.impl.RootCrop;
+import org.example.project.model.RootCrop;
 import org.example.project.service.strategy.random.RandomFillingStrategy;
 
 import java.util.ArrayList;

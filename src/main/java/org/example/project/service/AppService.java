@@ -1,12 +1,12 @@
 package org.example.project.service;
 
-import org.example.project.model.impl.Book;
-import org.example.project.model.impl.Car;
-import org.example.project.model.impl.RootCrop;
+import org.example.project.model.Book;
+import org.example.project.model.Car;
+import org.example.project.model.RootCrop;
 import org.example.project.presentation.AppMenu;
-import org.example.project.service.comparator.impl.BookPagesComparator;
-import org.example.project.service.comparator.impl.CarPowerComparator;
-import org.example.project.service.comparator.impl.RootCropWeightComparator;
+import org.example.project.service.comparator.BookPagesComparator;
+import org.example.project.service.comparator.CarPowerComparator;
+import org.example.project.service.comparator.RootCropWeightComparator;
 import org.example.project.service.search.impl.BookBinarySerach;
 import org.example.project.service.search.impl.CarBinarySearch;
 import org.example.project.service.search.impl.RootCropBinarySearch;
@@ -21,7 +21,6 @@ import org.example.project.service.strategy.input.impl.ManualInputStrategy;
 import org.example.project.service.strategy.input.impl.RandomInputStrategy;
 import org.example.project.util.AppUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;

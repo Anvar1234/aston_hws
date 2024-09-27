@@ -1,6 +1,6 @@
 package org.example.project.service.search.impl;
 
-import org.example.project.model.impl.Book;
+import org.example.project.model.Book;
 import org.example.project.service.search.BinarySearchable;
 
 import java.util.List;

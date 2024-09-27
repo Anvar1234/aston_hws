@@ -1,6 +1,6 @@
-package org.example.project.service.comparator.impl;
+package org.example.project.service.comparator;
 
-import org.example.project.model.impl.RootCrop;
+import org.example.project.model.RootCrop;
 
 import java.util.Comparator;
 
