@@ -1,5 +1,7 @@
 package org.example.project.util;
 
+import org.example.project.presentation.AppMenu;
+
 import java.util.Scanner;
 
 public class AppUtils {
@@ -28,11 +30,12 @@ public class AppUtils {
         }
     }
 
-    public static double parseDouble(String input, String errorMessage) {
-        try {
-            return Double.parseDouble(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(errorMessage, e);
+    public static int getValidPrompt(int leftBound, int rightBound, AppMenu appMenu, AppMenu.MenuType menuType){
+        int dataInputChoice = appMenu.showMenu(menuType);
+        while (dataInputChoice < leftBound || dataInputChoice > rightBound) {
+            System.out.println("\nНекорректный выбор. Повторите.");
+            dataInputChoice = appMenu.showMenu(menuType);
         }
+        return dataInputChoice;
     }
 }

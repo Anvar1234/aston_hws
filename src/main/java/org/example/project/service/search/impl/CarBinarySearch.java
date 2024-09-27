@@ -6,7 +6,7 @@ import org.example.project.service.search.BinarySearchable;
 import java.util.List;
 import java.util.Optional;
 
-public class CarSearchStrategy implements BinarySearchable<Car> {
+public class CarBinarySearch implements BinarySearchable<Car> {
     @Override
     public Optional<Car> binarySearch(List<Car> sortedList, String target) {
         int left = 0;

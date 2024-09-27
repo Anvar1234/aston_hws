@@ -2,6 +2,7 @@ package org.example.project.controller;
 
 import org.example.project.presentation.AppMenu;
 import org.example.project.service.AppService;
+import org.example.project.util.AppUtils;
 
 import java.io.IOException;
 import java.util.*;
@@ -21,29 +22,27 @@ public class AppController {
 
         boolean exit = false;
         while (!exit) {
-            int choice = appMenu.showMenu(AppMenu.MenuType.MAIN_MENU);
+            int choice = AppUtils.getValidPrompt(1, 4, appMenu, AppMenu.MenuType.MAIN_MENU);
 
             switch (choice) {
                 case 1 -> {
                     try {
                         products.clear();
-                        choice = appMenu.showMenu(AppMenu.MenuType.DATA_INPUT_MENU);
+                        choice = AppUtils.getValidPrompt(1, 3, appMenu, AppMenu.MenuType.DATA_INPUT_MENU);
                         products.put(0, appService.getHandleDataInput(choice));
 
-                        System.out.println("Полученные данные: ");
-                        for (int i = 0; i < products.get(0).size(); i++) {
-                            System.out.println(products.get(0).get(i));
-                        }
+                        System.out.println("\nПолученные данные: ");
+                        products.get(0).forEach(System.out::println);
                     } catch (IOException e) {
-                        throw new RuntimeException(e); //TODO: нормально обработать нужно.
+                        System.out.println("\nОшибка ввода данных: " + e.getMessage());
+                        System.out.println("Пожалуйста, повторите ввод.");
                     }
                 }
                 case 2 -> {
                     if (!products.containsKey(0)) {
-                        System.out.println("Сначала следует заполнить список.");
-
+                        System.out.println("\nСначала следует заполнить список.");
                     } else {
-                        choice = appMenu.showMenu(AppMenu.MenuType.SORTING_MENU);
+                        choice = AppUtils.getValidPrompt(1, 2, appMenu, AppMenu.MenuType.SORTING_MENU);
                         switch (choice) {
                             case 1 -> {
                                 products.put(1, appService.getHandleSorting(products.get(0), choice));
@@ -52,23 +51,23 @@ public class AppController {
                             case 2 -> {
                                 if (!products.containsKey(1)) {
                                     products.put(2, appService.getHandleSorting(products.get(0), choice));
+                                    products.get(2).forEach(System.out::println);
                                 } else {
-                                    //TODO: проблема была здесь.
                                     List<?> temp = products.get(0); //Времянка для того, чтобы если пройдена сортировка слиянием, а потом по четным, а следом вызывается поиск, то поиск не происходил, так как список получится неотсортированным.
                                     products.put(2, appService.getHandleSorting(temp, choice));
                                     temp.forEach(System.out::println);
                                 }
                             }
-                            default -> System.out.println("Некорректный выбор. Повторите.");
+                            default -> System.out.println("\nНекорректный выбор. Повторите.");
                         }
                     }
                 }
 
                 case 3 -> {
                     if (!products.containsKey(0)) {
-                        System.out.println("Сначала следует заполнить список.");
+                        System.out.println("\nСначала следует заполнить список.");
                     } else if (!products.containsKey(1)) {
-                        System.out.println("Сначала следует отсортировать список через MergeSort.");
+                        System.out.println("\nСначала следует отсортировать список через MergeSort.");
                     } else {
                         appService.getHandleBinarySearch(products.get(1));
                     }
