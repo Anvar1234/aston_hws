@@ -26,7 +26,6 @@ public class RootCropBinarySearch implements BinarySearchable<RootCrop> {
                 left = middle + 1;  // Искомый элемент в правой части
             }
         }
-
         return Optional.empty();  // Элемент не найден
     }
 }

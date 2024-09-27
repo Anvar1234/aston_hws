@@ -10,3 +10,4 @@ public class BookPagesComparator implements Comparator<Book> {
         return Integer.compare(book1.getPages(), book2.getPages());
     }
 }
+

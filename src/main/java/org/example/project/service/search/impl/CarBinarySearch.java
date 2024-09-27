@@ -26,7 +26,6 @@ public class CarBinarySearch implements BinarySearchable<Car> {
                 left = middle + 1;  // Искомый элемент в правой части
             }
         }
-
         return Optional.empty();  // Элемент не найден
     }
 }

@@ -21,6 +21,7 @@ import org.example.project.service.strategy.input.impl.ManualInputStrategy;
 import org.example.project.service.strategy.input.impl.RandomInputStrategy;
 import org.example.project.util.AppUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +29,9 @@ import java.util.Optional;
 import static org.example.project.util.AppUtils.*;
 import static org.example.project.util.StrategyGetterUtil.*;
 
+/**
+ * Класс, инкапсулирующий основную логику приложения.
+ */
 public class AppService {
 
     private final AppMenu appMenu;
@@ -36,6 +40,12 @@ public class AppService {
         this.appMenu = appMenu;
     }
 
+    /**
+     * Метод обработки вариантов ввода: из файла, ручной, рандомный.
+     * @param inputChoice входная переменная выбора варианта ввода.
+     * @return при успешной обработке возвращает заполненную указанным способ коллекцию.
+     * @throws IOException
+     */
     public List<?> getHandleDataInput(int inputChoice) throws IOException {
 
         List<?> products = List.of();
@@ -46,16 +56,22 @@ public class AppService {
                 strategy = getInputStrategies(1); // Выбираем стратегию ввода из файла (id == 1).
                 InputStrategy<?> inputStrategy = strategy.getInputStrategy(); // Получаем конкретную стратегию, чтобы засеттить данные.
                 String fileName = prompt("\nВведите наименование файла: \n");
+
+                if (!AppUtils.isValidFile(fileName)) {
+                    return List.of();
+                }
                 if (inputStrategy instanceof FileInputStrategy<?>) {
                     ((FileNameSetable) inputStrategy).setFileName(fileName);
-                } else {
-                    throw new UnsupportedOperationException("Что-то напутано в методе выбора стратегии ввода."); //TODO: обработать нормально.
+                }  else {
+                    System.out.println("Ошибка выбора стратегии ввода: не поддерживается.");
+                    return products;
                 }
 
                 int productId = AppUtils.getValidPrompt(1, 3, appMenu, AppMenu.MenuType.PRODUCT_CHOICE_MENU);
                 ((ParseSetable) inputStrategy).setParseStrategy(getParseStrategies(productId));
 
-                int count = parseInteger(prompt("\nУкажите кол-во считываемых элементов: \n"), "Ввод должен быть числом");
+                int count = AppUtils.getValidLocalPrompt(parseInteger(prompt("\nУкажите кол-во считываемых элементов: \n"), "Ввод должен быть числом")); //TODO
+
                 products = strategy.input(count);
 
                 return products;
@@ -69,10 +85,11 @@ public class AppService {
                     ((ManualInputStrategy<?>) inputStrategy).setParseStrategy(getParseStrategies(productId));
                     ((ManualInputStrategy<?>) inputStrategy).setPromptStrategy(getPromptStrategies(productId));
                 } else {
-                    throw new UnsupportedOperationException("Что-то напутано в методе выбора стратегии ввода."); //TODO
+                    System.out.println("Ошибка выбора стратегии ввода: не поддерживается.");
+                    return products;
                 }
 
-                int count = parseInteger(prompt("\nУкажите кол-во вводимых элементов: \n"), "Ввод должен быть числом");
+                int count = parseInteger(prompt("\nУкажите кол-во вводимых элементов: \n"), "Ввод должен быть числом"); //TODO
                 products = strategy.input(count);
                 return products;
             }
@@ -84,10 +101,11 @@ public class AppService {
                 if (inputStrategy instanceof RandomInputStrategy<?>) {
                     ((RandomInputStrategy<?>) inputStrategy).setRandomGeneratorStrategy(getRandomFillingStrategies(productId));
                 } else {
-                    throw new UnsupportedOperationException("Что-то напутано в методе выбора стратегии ввода."); //TODO
+                    System.out.println("Ошибка выбора стратегии ввода: не поддерживается.");
+                    return products;
                 }
 
-                int count = parseInteger(prompt("\nУкажите кол-во генерируемых элементов: \n"), "Ввод должен быть числом");
+                int count = AppUtils.getValidLocalPrompt(parseInteger(prompt("\nУкажите кол-во считываемых элементов: \n"), "Ввод должен быть числом")); //TODO
                 products = strategy.input(count);
                 return products;
             }

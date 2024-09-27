@@ -1,6 +1,9 @@
 package org.example.project.service.sort;
 
 import org.example.project.model.NumericFieldGetable;
+import org.example.project.model.impl.Book;
+import org.example.project.model.impl.Car;
+import org.example.project.model.impl.RootCrop;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -9,51 +12,67 @@ import java.util.List;
 public class EvenNumberMergeSort<T> {
 
     public void evenMergeSort(List<T> list, Comparator comparator) {
+        // Сначала создадим список для четных элементов
+        List<T> evenElements = new ArrayList<>();
+
+        for (T item : list) {
+            if (isEven(item)) {
+                evenElements.add(item);
+            }
+        }
+
+        // Сортируем только четные элементы
+        mergeSortEven(evenElements, comparator);
+
+        // Вставляем отсортированные четные элементы обратно в исходный список
+        int evenIndex = 0;
+        for (int i = 0; i < list.size(); i++) {
+            if (isEven(list.get(i))) {
+                list.set(i, evenElements.get(evenIndex++));
+            }
+        }
+        return;
+    }
+
+    // Проверка на четность.
+    private boolean isEven(T item) {
+        if (item instanceof Car) {
+            return ((Car) item).getPower() % 2 == 0;
+        }
+        if (item instanceof Book) {
+            return ((Book) item).getPages() % 2 == 0;
+        }
+        if (item instanceof RootCrop) {
+            return ((RootCrop) item).getWeight() % 2 == 0;
+        }
+        return false; // Возвращаем false по умолчанию для других типов
+    }
+
+    private void mergeSortEven(List<T> list, Comparator comparator) {
         if (list.size() > 1) {
             int middle = list.size() / 2;
 
             List<T> left = new ArrayList<>(list.subList(0, middle));
             List<T> right = new ArrayList<>(list.subList(middle, list.size()));
 
-            evenMergeSort(left, comparator);
-            evenMergeSort(right, comparator);
+            mergeSortEven(left, comparator);
+            mergeSortEven(right, comparator);
 
             merge(list, left, right, comparator);
         }
     }
 
-    private void merge(List<T> list, List<T> left, List<T> right, Comparator<T> comparator) {
+    private void merge(List<T> list, List<T> left, List<T> right, Comparator comparator) {
         int i = 0, j = 0, k = 0;
 
         while (i < left.size() && j < right.size()) {
-            T leftElement = left.get(i);
-            T rightElement = right.get(j);
-
-            // Get the numeric field value for each element
-            Integer leftValue = ((NumericFieldGetable<Integer>) leftElement).getNumericField();
-            Integer rightValue = ((NumericFieldGetable<Integer>) rightElement).getNumericField();
-
-            // If both values are even, sort in natural order
-            if (leftValue % 2 == 0 && rightValue % 2 == 0) {
-                if (comparator.compare(leftElement, rightElement) <= 0) {
-                    list.set(k++, leftElement);
-                    i++;
-                } else {
-                    list.set(k++, rightElement);
-                    j++;
-                }
-            }
-            // If one value is even and the other is odd, prioritize the even one
-            else if (leftValue % 2 == 0) {
-                list.set(k++, leftElement);
-                i++;
+            if (comparator.compare(left.get(i), right.get(j)) <= 0) {
+                list.set(k++, left.get(i++));
             } else {
-                list.set(k++, rightElement);
-                j++;
+                list.set(k++, right.get(j++));
             }
         }
 
-        // Handle remaining elements
         while (i < left.size()) {
             list.set(k++, left.get(i++));
         }
@@ -62,67 +81,4 @@ public class EvenNumberMergeSort<T> {
             list.set(k++, right.get(j++));
         }
     }
-//        <T extends NumericFieldGetable<N>, N extends Number> {
-//
-//    public void evenMergeSort(List<T> list, Comparator<T> comparator) {
-//        if (list.size() > 1) {
-//            int middle = list.size() / 2;
-//
-//            List<T> left = new ArrayList<>(list.subList(0, middle));
-//            List<T> right = new ArrayList<>(list.subList(middle, list.size()));
-//
-//            evenMergeSort(left, comparator);
-//            evenMergeSort(right, comparator);
-//
-//            merge(list, left, right, comparator);
-//        }
-//    }
-//
-//    private void merge(List<T> list, List<T> left, List<T> right, Comparator<T> comparator) {
-//        int i = 0, j = 0, k = 0;
-//
-//        while (i < left.size() && j < right.size()) {
-//            T leftElement = left.get(i);
-//            T rightElement = right.get(j);
-//
-//            N leftNumericValue = leftElement.getNumericField();
-//            N rightNumericValue = rightElement.getNumericField();
-//
-//            if (leftNumericValue.doubleValue() % 2 == 0 && rightNumericValue.doubleValue() % 2 == 0) {
-//                // Оба элемента имеют четные числовые значения, сортировать в естественном порядке.
-//                if (comparator.compare(leftElement, rightElement) <= 0) {
-//                    list.set(k++, leftElement);
-//                    i++;
-//                } else {
-//                    list.set(k++, rightElement);
-//                    j++;
-//                }
-//            } else if (leftNumericValue.doubleValue() % 2 == 0) {
-//                // Левый элемент имеет четное числовое значение, сортировать в естественном порядке.
-//                list.set(k++, leftElement);
-//                i++;
-//            } else if (rightNumericValue.doubleValue() % 2 == 0) {
-//                // Правый элемент имеет четное числовое значение, сортировать в естественном порядке.
-//                list.set(k++, rightElement);
-//                j++;
-//            } else {
-//                // Оба элемента имеют нечетные числовые значения, оставляем их в исходном порядке.
-//                if (i < left.size()) {
-//                    list.set(k++, leftElement);
-//                    i++;
-//                } else {
-//                    list.set(k++, rightElement);
-//                    j++;
-//                }
-//            }
-//        }
-//
-//        while (i < left.size()) {
-//            list.set(k++, left.get(i++));
-//        }
-//
-//        while (j < right.size()) {
-//            list.set(k++, right.get(j++));
-//        }
-//    }
 }

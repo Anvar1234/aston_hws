@@ -29,10 +29,10 @@ public class AppController {
                     try {
                         products.clear();
                         choice = AppUtils.getValidPrompt(1, 3, appMenu, AppMenu.MenuType.DATA_INPUT_MENU);
-                        products.put(0, appService.getHandleDataInput(choice));
-
-                        System.out.println("\nПолученные данные: ");
-                        products.get(0).forEach(System.out::println);
+                        List<?> objects = appService.getHandleDataInput(choice);
+                        if (!AppUtils.isListEmpty(objects)) { //TODO
+                            products.put(0, objects);
+                        }
                     } catch (IOException e) {
                         System.out.println("\nОшибка ввода данных: " + e.getMessage());
                         System.out.println("Пожалуйста, повторите ввод.");
@@ -53,7 +53,7 @@ public class AppController {
                                     products.put(2, appService.getHandleSorting(products.get(0), choice));
                                     products.get(2).forEach(System.out::println);
                                 } else {
-                                    List<?> temp = products.get(0); //Времянка для того, чтобы если пройдена сортировка слиянием, а потом по четным, а следом вызывается поиск, то поиск не происходил, так как список получится неотсортированным.
+                                    List<?> temp = products.get(0);
                                     products.put(2, appService.getHandleSorting(temp, choice));
                                     temp.forEach(System.out::println);
                                 }
